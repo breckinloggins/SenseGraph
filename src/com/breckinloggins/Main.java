@@ -1,5 +1,8 @@
 package com.breckinloggins;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.Sys;
 import org.lwjgl.opengl.Display;
@@ -25,9 +28,14 @@ public class Main {
     /** last fps time */
     long lastFPS;
 
+    List<IDrawable> drawables;
+
     public Main(int screenWidth, int screenHeight) {
         this.screenWidth = screenWidth;
         this.screenHeight = screenHeight;
+        this.drawables = new ArrayList<IDrawable>();
+
+        this.drawables.add(new GraphNode(100, 100));
 
         try {
             Display.setDisplayMode(new DisplayMode(screenWidth, screenHeight));
@@ -129,18 +137,9 @@ public class Main {
         }
         GL11.glPopMatrix();
 
-        drawCircle(50, 60, 30);
-    }
-
-    private void drawCircle(int x, int y, int radius) {
-        GL11.glBegin(GL11.GL_LINE_LOOP);
-
-        for (int angle = 0; angle <= 360; angle += 5) {
-            double rad = Math.toRadians(angle);
-            GL11.glVertex2d(x + Math.sin(rad) * radius, y + Math.cos(rad) * radius);
+        for (IDrawable drawable : drawables) {
+            drawable.draw();
         }
-
-        GL11.glEnd();
     }
 
     public static void main(String[] args) {

@@ -119,23 +119,7 @@ public class Main {
         // R,G,B,A set the color to blue one time only
         GL11.glColor3f(0.5f, 0.5f, 1.0f);
 
-        // Draw the quad
-        GL11.glPushMatrix();
-        {
-            GL11.glTranslatef(x, y, 0);
-            GL11.glRotatef(rotation, 0f, 0f, 1f);
-            GL11.glTranslatef(-x, -y, 0);
-
-            GL11.glBegin(GL11.GL_QUADS);
-            {
-                GL11.glVertex2f(x - 50, y - 50);
-                GL11.glVertex2f(x + 50, y - 50);
-                GL11.glVertex2f(x + 50, y + 50);
-                GL11.glVertex2f(x - 50, y + 50);
-            }
-            GL11.glEnd();
-        }
-        GL11.glPopMatrix();
+        DrawUtils.drawQuad(x, y, 100, rotation);
 
         for (IDrawable drawable : drawables) {
             drawable.draw();

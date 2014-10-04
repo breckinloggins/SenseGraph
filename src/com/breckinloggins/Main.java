@@ -7,6 +7,8 @@ import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 public class Main {
+    /** screen dimensions */
+    int screenWidth = 800, screenHeight = 600;
 
     /** position of quad */
     float x = 400, y = 300;
@@ -23,9 +25,12 @@ public class Main {
     /** last fps time */
     long lastFPS;
 
-    public Main() {
+    public Main(int screenWidth, int screenHeight) {
+        this.screenWidth = screenWidth;
+        this.screenHeight = screenHeight;
+
         try {
-            Display.setDisplayMode(new DisplayMode(800, 600));
+            Display.setDisplayMode(new DisplayMode(screenWidth, screenHeight));
             Display.setVSyncEnabled(true);
             Display.create();
         } catch (LWJGLException e) {
@@ -95,7 +100,7 @@ public class Main {
         GL11.glDisable(GL11.GL_DEPTH_TEST);
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, 800, 0, 600, 1, -1);
+        GL11.glOrtho(0, screenWidth, 0, screenHeight, 1, -1);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
     }
 
@@ -139,6 +144,6 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        new Main();
+        new Main(1280, 1024);
     }
 }

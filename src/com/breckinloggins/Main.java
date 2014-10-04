@@ -88,7 +88,7 @@ public class Main {
      */
     private void updateFPS() {
         if (getTime() - lastFPS > 1000) {
-            Display.setTitle("FPS: " + fps);
+            Display.setTitle("SenseGraph (FPS: " + fps + ")");
             fps = 0;
             lastFPS += 1000;
         }
